@@ -124,9 +124,14 @@ public class ParserFromHtml {
 
         Description description = getDescription(descriptionElement);
 
-        String text = articleAndDescriptionElement.get(0).child(0).text();
-        String[] splitArticleArray = text.split("Artikel-Nr: ");
-        String article = splitArticleArray[1];
+        String article = "";
+
+        for (Element element : articleAndDescriptionElement) {
+            String text = element.child(0).text();
+            String[] splitArticleArray = text.split("Artikel-Nr: ");
+            article = splitArticleArray[1];
+        }
+
 
         return new Product(name, brand, color, price, initialPrice, article, shippingCosts, description);
     }
